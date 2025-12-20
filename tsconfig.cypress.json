@@ -6,6 +6,6 @@
   ],
   "compilerOptions": {
     "types": ["cypress", "@cypress/react"],
-    "typesRoot": ["./node_modules/@types", "./node_modules"]
+    "typeRoots": ["./node_modules/@types", "./node_modules"]
   }
 }
