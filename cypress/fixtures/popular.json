@@ -1,0 +1,16 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 1,
+      "title": "Test Movie",
+      "overview": "A test movie.",
+      "poster_path": "/test.jpg",
+      "release_date": "2023-01-01",
+      "vote_average": 8.5,
+      "vote_count": 100,
+      "popularity": 10.0
+    }
+  ],
+  "total_pages": 1
+}

@@ -1,0 +1,16 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 123,
+      "title": "Inception",
+      "overview": "A mind-bending thriller.",
+      "poster_path": "/inception.jpg",
+      "release_date": "2010-07-16",
+      "vote_average": 8.8,
+      "vote_count": 2000,
+      "popularity": 50.0
+    }
+  ],
+  "total_pages": 1
+}

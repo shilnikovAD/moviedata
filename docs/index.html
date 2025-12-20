@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MovieCatalog — презентация приложения</title>
+  <style>
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      background-color: #121212;
+      color: #eee;
+      line-height: 1.6;
+    }
+    header, footer {
+      background-color: #1f1f1f;
+      padding: 1em 2em;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0.2em 0;
+      font-size: 2.2em;
+    }
+    nav {
+      background: #222;
+      padding: 0.5em;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #bbbbbb;
+      margin: 0 1em;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+    nav a:hover {
+      color: #60a5fa;
+    }
+    section {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+    h2 {
+      border-bottom: 2px solid #60a5fa;
+      padding-bottom: 0.3em;
+      margin-bottom: 1em;
+      font-weight: 700;
+      font-size: 1.8em;
+    }
+    h3 {
+      color: #60a5fa;
+      margin-top: 2em;
+      font-size: 1.3em;
+    }
+    ul, ol {
+      margin-left: 1.5em;
+    }
+    pre.code-block {
+      background: rgba(255,255,255,0.05);
+      padding: 1em;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      font-size: 0.9em;
+      overflow-x: auto;
+      margin-top: 1em;
+    }
+    small {
+      color: #888;
+    }
+
+    /* Стили макетов */
+    .mockup {
+      max-width: 600px;
+      margin: 1em 0;
+      border: 2px solid #60a5fa;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1a1a1a;
+      box-shadow: 0 8px 32px rgba(96, 165, 250, 0.2);
+    }
+
+    .mockup-row {
+      display: flex;
+      align-items: center;
+      min-height: 60px;
+      padding: 1em;
+      border-bottom: 1px solid #333;
+      background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+    }
+
+    .mockup-row:last-child {
+      border-bottom: none;
+    }
+
+    .mockup-row.title {
+      justify-content: center;
+      font-size: 1.4em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #60a5fa, #3b82f6);
+      color: white;
+      text-align: center;
+      padding: 1.5em;
+    }
+
+    .content {
+      flex-wrap: wrap;
+      gap: 1em;
+      padding: 2em 1em;
+    }
+
+    .filter, .cards, .poster, .saved-cards {
+      flex: 1;
+      min-width: 150px;
+      height: 120px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cards, .saved-cards {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .poster {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      flex: 0 0 200px;
+    }
+
+    .details {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    .details > div {
+      height: 80px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .options {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      justify-content: center;
+      font-size: 0.95em;
+      padding: 1.5em;
+    }
+
+    .main-page .content {
+      padding: 2em 1em;
+    }
+
+    .movie-page .content {
+      padding: 1.5em;
+    }
+
+    .favorites-page {
+      max-width: 500px;
+    }
+
+    .favorites-page .saved-cards {
+      height: 200px;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .mockup-row {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .content {
+        flex-direction: column;
+      }
+
+      .details {
+        flex-direction: column;
+      }
+    }
+
+    /* Стили для вопросов и ответов */
+    .faq {
+      max-width: 700px;
+      margin: 2em auto;
+      background: #1f1f1f;
+      border-radius: 8px;
+      padding: 1.5em 2em;
+    }
+    .faq h2 {
+      margin-bottom: 1em;
+    }
+    .question {
+      font-weight: 700;
+      margin-top: 1em;
+      color: #60a5fa;
+    }
+    .answer {
+      margin: 0.5em 0 1em 0;
+      color: #ccc;
+      line-height: 1.4;
+    }
+
+    /* Векторные иконки */
+    .icon {
+      width: 64px;
+      height: 64px;
+      vertical-align: middle;
+      fill: #60a5fa;
+      margin-right: 0.5em;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>MovieData</h1>
+</header>
+
+<nav>
+  <a href="#idea">Описание идеи</a>
+  <a href="#scenarios">Пользовательские сценарии</a>
+  <a href="#design">Дизайн</a>
+  <a href="#api">API</a>
+  <a href="#work-plan">План работ / Риски</a>
+  <a href="#faq">Вопросы и ответы</a>
+</nav>
+
+<main>
+  <section id="idea">
+    <h2>Описание идеи</h2>
+    <ul>
+      <li>Проблема: сложно находить персонализированные подборки фильмов и сохранять любимые в одном месте, реклама.</li>
+      <li>Решение: удобный каталог фильмов с поиском, деталями и списком избранного (локальное хранение).</li>
+      <li>Ключевой функционал: просмотр популярных, поиск, страница фильма, избранное, адаптивный UI.</li>
+      <li>Преимущество: лёгкая кастомизация рекомендаций, офлайн-доступ к избранному, нет рекламы</li>
+    </ul>
+  </section>
+
+  <section id="scenarios">
+    <h2>Пользовательские сценарии</h2>
+    <ol>
+      <li>Пользователь открывает главную — видит популярные фильмы — использует поиск по заголовку — открывает страницу фильма.</li>
+      <li>Пользователь на странице фильма — добавляет в избранное — проверяет список избранного в профиле/странице "Избранное".</li>
+      <li>Пользователь фильтрует результаты по жанру/году — кликает фильм — делится ссылкой на фильм.</li>
+    </ol>
+  </section>
+
+  <section id="design">
+    <h2>Дизайн и схемы</h2>
+
+    <h3>Главная</h3>
+    <div class="mockup main-page">
+      <div class="mockup-row header">Header (логотип, поиск, меню)</div>
+      <div class="content">
+        <div class="filter">Фильтр</div>
+        <div class="cards">Карточки фильмов</div>
+        <div class="cards">Карточки фильмов</div>
+      </div>
+      <div class="mockup-row footer">Footer</div>
+    </div>
+
+    <h3>Страница фильма</h3>
+    <div class="mockup movie-page">
+      <div class="mockup-row title">Название</div>
+      <div class="content">
+        <div class="poster">Постер</div>
+        <div class="details">
+          <div>Описание, рейтинг, кнопки</div>
+          <div>Трейлер, похожие фильмы</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Избранное</h3>
+    <div class="mockup favorites-page">
+      <div class="mockup-row">
+        <div class="saved-cards">Список сохранённых карточек</div>
+      </div>
+      <div class="mockup-row options">Опции: удалить, перейти к фильму</div>
+    </div>
+  </section>
+
+  <section id="api">
+    <h2>API (REST)</h2>
+    <p>Интеграция через TMDB + собственные endpoint'ы при необходимости.</p>
+    <ul>
+      <li><strong>GET</strong> /movie/popular?page={n} — список популярных</li>
+      <li><strong>GET</strong> /search/movie?query={q}&page={n} — поиск</li>
+      <li><strong>GET</strong> /movie/{id} — детали фильма</li>
+      <li>Клиент хранит токен TMDB в окружении; любимые хранятся в localStorage.</li>
+    </ul>
+  </section>
+
+  <section id="work-plan">
+    <h2>Риски</h2>
+    <ul>
+      <li>Риски: лимиты TMDB API, адаптивность, тестирование на разных устройствах.</li>
+    </ul>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>Вопросы и ответы</h2>
+
+    <div class="question">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.483 2 2 6.483 2 12s4.483 10 10 10 10-4.483 10-10S17.517 2 12 2zm.25 15h-1.5v-1.5h1.5V17zm2.14-6.62a3.993 3.993 0 00-2.31-1.257c-.69-.117-1.424.01-2.1.392a2.75 2.75 0 00-1.39 2.83h1.5a1.25 1.25 0 011.177-1.716c.317 0 .581.196.67.48a1.746 1.746 0 01-.074.967c-.354.82-1.444 1.122-1.675 2.627h1.5c.114-1.064 1.131-1.354 1.551-2.227a2.3 2.3 0 00-.165-2.041z"/></svg>
+      Цель проекта?
+    </div>
+    <div class="answer">
+      Создать удобный и адаптивный каталог фильмов с персональными рекомендациями и возможностью сохранять избранное для офлайн-доступа.
+    </div>
+
+    <div class="question">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M9 21H7a2 2 0 01-2-2V7a2 2 0 012-2h7l5 5v9a2 2 0 01-2 2h-1M9 9h1v3H9z"/></svg>
+      Какие проблемы решает проект?
+    </div>
+    <div class="answer">
+      Сложность поиска персонализированных подборок и хранение избранных фильмов в одном удобном месте.
+    </div>
+
+    <div class="question">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 7v10M7 12h10" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/></svg>
+      Какие основные функции предусмотрены?
+    </div>
+    <div class="answer">
+      Просмотр популярных фильмов, поиск по заголовку, фильтрация по жанру и году, список избранного и страница с деталями фильма.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <small>MovieData 2025</small>
+</footer>
+</body>
+</html>
