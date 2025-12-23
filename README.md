@@ -190,32 +190,45 @@ VITE_USE_MOCK=false
 VITE_TMDB_API_KEY=6b9590515133272d26bc843f7189fd91
 VITE_SUPABASE_URL=https://hjuxjngtnubujsxjmkmi.supabase.co
 VITE_SUPABASE_ANON_KEY=sb_publishable_ElDm_zJ-xDH9uawCFl2W0A_2bMK3MS1
-VITE_WS_URL=ws://localhost:3001
+VITE_WS_URL=wss://your-railway-app.railway.app
 ```
 
-### Шаг 2: Передеплой проекта
+### Шаг 2: Разверните WebSocket сервер
+Для работы Watch Party между устройствами разверните WebSocket сервер:
+
+**Рекомендация: Railway (бесплатно)**
+1. Создайте проект на [railway.app](https://railway.app)
+2. Подключите GitHub репозиторий
+3. Установите **Root Directory**: `server`
+4. Добавьте переменную: `PORT=3001`
+5. Скопируйте URL после развертывания
+6. Обновите `VITE_WS_URL` в Vercel на `wss://your-app.railway.app`
+
+### Шаг 3: Передеплой проекта
 
 ```bash
 # Сделайте commit изменений
 git add .
-git commit -m "Enable real TMDB API for production"
+git commit -m "Enable real TMDB API and WebSocket server"
 git push origin main
 
 # Vercel автоматически передеплоит
 ```
 
-### Шаг 3: Проверка
+### Шаг 4: Проверка
 
 После деплоя:
 1. Откройте приложение на Vercel
-2. Попробуйте поиск "Spider-Man" 
-3. Должны появиться реальные результаты из TMDB
+2. Попробуйте поиск "Spider-Man" - должны появиться реальные результаты
+3. Создайте Watch Party на одном устройстве
+4. Присоединитесь с другого устройства - синхронизация должна работать!
 
 ### Если всё ещё не работает:
 
 1. **Проверьте консоль браузера** (F12 → Console) на ошибки
 2. **Проверьте Network** вкладку на failed requests
 3. **Убедитесь что переменные окружения установлены** в Vercel
+4. **Проверьте что WebSocket сервер запущен** и URL правильный
 
 ### Альтернатива: Использование mock данных
 
