@@ -54,26 +54,44 @@
 .clearBtn {
   display: block;
   margin: 1rem auto 0;
-  padding: 0.5rem 1rem;
-  background: #666;
+  padding: 0.75rem 1.5rem;
+  background: #3498db;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  transition: background 0.2s;
 }
 
 .clearBtn:hover {
-  background: #555;
+  background: #2980b9;
 }
 
+/* Mobile styles */
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
+  .page {
+    padding: 1rem 0.5rem;
   }
-  
+
   .title {
     font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .loading,
+  .error,
+  .empty {
+    padding: 2rem 1rem;
+    font-size: 1rem;
   }
 }

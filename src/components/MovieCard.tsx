@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { Movie } from '../types/movie.ts';
 import { useAppDispatch, useAppSelector } from '../store/hooks.ts';
-import { addToFavorites, removeFromFavorites } from '../features/favorites/favoritesSlice.ts';
+import { addFavoriteAsync, removeFavoriteAsync } from '../features/favorites/favoritesSlice.ts';
 import { movieApi } from '../services/movieApi.ts';
 import styles from './MovieCard.module.css';
 
@@ -19,9 +19,9 @@ export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (isFavorite) {
-      dispatch(removeFromFavorites(movie.id));
+      dispatch(removeFavoriteAsync(movie.id));
     } else {
-      dispatch(addToFavorites(movie));
+      dispatch(addFavoriteAsync(movie));
     }
   };
 

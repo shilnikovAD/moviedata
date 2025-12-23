@@ -33,4 +33,6 @@ export interface MoviesState {
 
 export interface FavoritesState {
   favorites: Movie[];
+  loading: boolean;
+  error: string | null;
 }

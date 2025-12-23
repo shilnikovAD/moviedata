@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { addToFavorites, removeFromFavorites, clearFavorites } from '../features/favorites/favoritesSlice';
+import { addFavoriteAsync, removeFavoriteAsync, clearFavorites } from '../features/favorites/favoritesSlice';
 import styles from './TestPage.module.css';
 
 export const TestPage = () => {
@@ -32,7 +32,7 @@ export const TestPage = () => {
       popularity: 100,
     };
 
-    dispatch(addToFavorites(testMovie));
+    dispatch(addFavoriteAsync(testMovie));
 
     setTimeout(() => {
       const inStore = favorites.some(f => f.id === 999999);
@@ -44,14 +44,14 @@ export const TestPage = () => {
       addTestResult('Test 2: LocalStorage save', hasInLocal);
 
       // Тест 3: Удаление из избранного
-      dispatch(removeFromFavorites(999999));
+      dispatch(removeFavoriteAsync(999999));
 
       setTimeout(() => {
         const stillInStore = favorites.some(f => f.id === 999999);
         addTestResult('Test 3: Remove from favorites', !stillInStore);
 
         // Тест 4: Очистка всех
-        dispatch(addToFavorites(testMovie));
+        dispatch(addFavoriteAsync(testMovie));
         setTimeout(() => {
           dispatch(clearFavorites());
           setTimeout(() => {
@@ -222,4 +222,3 @@ export const TestPage = () => {
     </div>
   );
 };
-

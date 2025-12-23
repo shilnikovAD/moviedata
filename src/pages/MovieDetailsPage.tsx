@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks.ts';
 import { fetchMovieDetails } from '../features/movies/moviesSlice.ts';
-import { addToFavorites, removeFromFavorites } from '../features/favorites/favoritesSlice.ts';
+import { addFavoriteAsync, removeFavoriteAsync } from '../features/favorites/favoritesSlice.ts';
 import { movieApi } from '../services/movieApi.ts';
 import styles from './MovieDetailsPage.module.css';
 
@@ -27,9 +27,9 @@ export const MovieDetailsPage = () => {
 
   const handleFavoriteClick = () => {
     if (isFavorite) {
-      dispatch(removeFromFavorites(movieDetails.id));
+      dispatch(removeFavoriteAsync(movieDetails.id));
     } else {
-      dispatch(addToFavorites(movieDetails));
+      dispatch(addFavoriteAsync(movieDetails));
     }
   };
 

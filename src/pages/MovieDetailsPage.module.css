@@ -207,20 +207,65 @@
 }
 
 @media (max-width: 768px) {
+  .page {
+    padding: 1rem 0.5rem;
+  }
+
+  .backBtn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
   .content {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  
+
+  .poster {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
   .title {
     font-size: 1.8rem;
   }
-  
+
   .header {
     flex-direction: column;
+    align-items: flex-start;
   }
-  
+
+  .actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .watchNowBtn,
+  .watchPartyBtn,
+  .favoriteBtn {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
   .meta {
     flex-direction: column;
     gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.1rem;
+  }
+
+  .overview {
+    font-size: 0.95rem;
+  }
+
+  .genre {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
   }
 }

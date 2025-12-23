@@ -4,6 +4,12 @@
 
 MovieCatalog — это веб-приложение для просмотра каталога фильмов, поиска и управления избранными фильмами. Оно позволяет пользователям просматривать популярные фильмы, искать по названию, добавлять фильмы в избранное и организовывать совместный просмотр (Watch Party) с синхронизацией видео и чатом между участниками. Приложение использует API The Movie Database (TMDB) для получения данных о фильмах. Демо доступно по адресу [http://localhost:5173](http://localhost:5173) после запуска.
 
+База данных реализована через Supabase для хранения избранных фильмов с использованием операций CRUD (GET, POST, DELETE). Асинхронные запросы обрабатываются через Redux с createAsyncThunk. Для получения высокой оценки реализована функция совместного просмотра с WebRTC для синхронизации видео и чата между участниками без единого бэкенд сервера.
+
+Для демонстрации избранные фильмы хранятся в localStorage. Чтобы использовать Supabase, установите `USE_LOCAL_STORAGE = false` в `src/services/favoritesApi.ts` и настройте Supabase.
+
+Приложение адаптировано для мобильных устройств с оптимизированными размерами элементов, сетками и компоновкой для экранов шириной менее 768px.
+
 ## Как получить исходники
 
 ```bash
@@ -16,8 +22,9 @@ cd moviedata
 - Node.js 22 LTS (скачать и установить с [официального сайта](https://nodejs.org/))
 - npm (устанавливается вместе с Node.js) или yarn
 - API ключ от The Movie Database (TMDB) — зарегистрируйтесь на [TMDB](https://www.themoviedb.org/) и получите ключ в разделе [API](https://www.themoviedb.org/settings/api)
+- Аккаунт Supabase для базы данных (бесплатный тариф доступен)
 
-База данных не требуется, так как приложение использует внешний API TMDB. Для локального тестирования можно использовать фикстуры в Cypress.
+База данных реализована через Supabase для хранения избранных фильмов. Для локального тестирования можно использовать фикстуры в Cypress.
 
 ## Как запустить проект
 
@@ -30,11 +37,27 @@ npm install
 
 ### Настройка переменных
 
-Откройте файл `src/services/movieApi.ts` и замените значение `API_KEY` на ваш реальный API ключ от TMDB:
+Откройте файл `src/services/movieApi.ts` и замените значение `API_KEY` на ваш реальный API ключ от TMDB, и установите `USE_MOCK = false` для использования реального API:
 
 ```typescript
+const USE_MOCK = false; // Set to false to use real TMDB API
 const API_KEY = 'ваш_api_ключ_здесь';
 ```
+
+Для демонстрации приложение использует mock данные. Чтобы использовать реальный TMDB API, зарегистрируйтесь на [TMDB](https://www.themoviedb.org/) и получите ключ.
+
+Создайте проект в Supabase (https://supabase.com), получите URL и анонимный ключ, и добавьте их в файл `.env`:
+
+```env
+VITE_SUPABASE_URL=your-supabase-url
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+Создайте таблицу `favorites` в Supabase с колонками:
+- `id` (uuid, primary key)
+- `user_id` (text)
+- `movie_id` (integer)
+- `movie_data` (jsonb)
 
 ### Команда запуска приложения
 
@@ -73,6 +96,7 @@ src/
 - **Frontend**: React 19, TypeScript, Vite
 - **State Management**: Redux Toolkit
 - **API**: The Movie Database (TMDB)
+- **Database**: Supabase
 - **Стилизация**: CSS Modules
 - **Тестирование**: Vitest, Cypress
 - **Документация**: Storybook

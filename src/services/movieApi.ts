@@ -1,9 +1,13 @@
 import type { Movie, MovieDetails } from '../types/movie.ts';
+import { mockMovieApi } from './mockMovieApi.ts';
+
+// Use mock API for development/demo
+const USE_MOCK = true; // Set to false to use real TMDB API
 
 const API_KEY = '6b9590515133272d26bc843f7189fd91'; // Replace with actual API key
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export const movieApi = {
+const realMovieApi = {
   // Get popular movies
   getPopularMovies: async (page: number = 1): Promise<{ results: Movie[]; total_pages: number }> => {
     const response = await fetch(
@@ -54,3 +58,5 @@ export const movieApi = {
     return `https://image.tmdb.org/t/p/${size}${path}`;
   },
 };
+
+export const movieApi = USE_MOCK ? mockMovieApi : realMovieApi;
