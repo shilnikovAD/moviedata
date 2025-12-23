@@ -2,9 +2,10 @@ import type { Movie, MovieDetails } from '../types/movie.ts';
 import { mockMovieApi } from './mockMovieApi.ts';
 
 // Use mock API for development/demo
-const USE_MOCK = true; // Set to false to use real TMDB API
+// Set to false to use real TMDB API (requires valid API key)
+const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false'; // Allow override via env
 
-const API_KEY = '6b9590515133272d26bc843f7189fd91'; // Replace with actual API key
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY || '6b9590515133272d26bc843f7189fd91'; // Replace with actual API key
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const realMovieApi = {
