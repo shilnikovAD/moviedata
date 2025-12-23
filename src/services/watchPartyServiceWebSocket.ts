@@ -194,6 +194,49 @@ class WatchPartyService {
     }
     return this.channel !== null;
   }
+
+  // Методы для управления воспроизведением
+  play(roomId: string, userId: string, currentTime: number) {
+    this.sendMessage({
+      type: 'play',
+      roomId,
+      userId,
+      data: { currentTime, isPlaying: true },
+    });
+  }
+
+  pause(roomId: string, userId: string, currentTime: number) {
+    this.sendMessage({
+      type: 'pause',
+      roomId,
+      userId,
+      data: { currentTime, isPlaying: false },
+    });
+  }
+
+  seek(roomId: string, userId: string, currentTime: number) {
+    this.sendMessage({
+      type: 'seek',
+      roomId,
+      userId,
+      data: { currentTime },
+    });
+  }
+
+  sendChat(roomId: string, userId: string, userName: string, message: string) {
+    this.sendMessage({
+      type: 'chat',
+      roomId,
+      userId,
+      userName,
+      data: { message },
+    });
+  }
+
+  // Генерация уникального ID для комнаты
+  static generateRoomId(): string {
+    return Math.random().toString(36).substring(2, 9);
+  }
 }
 
 export const watchPartyService = new WatchPartyService();

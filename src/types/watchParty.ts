@@ -24,10 +24,11 @@ export interface ChatMessage {
 }
 
 export interface WatchPartyMessage {
-  type: 'join' | 'leave' | 'play' | 'pause' | 'seek' | 'chat' | 'sync';
+  type: 'join' | 'leave' | 'play' | 'pause' | 'seek' | 'chat' | 'sync' | 'create-room' | 'join-room' | 'leave-room';
   roomId: string;
   userId: string;
   userName?: string;
+  movieId?: number;
   data?: {
     currentTime?: number;
     isPlaying?: boolean;
@@ -35,4 +36,3 @@ export interface WatchPartyMessage {
     participants?: Participant[];
   };
 }
-
