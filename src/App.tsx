@@ -14,7 +14,7 @@ import './App.css';
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/moviedata">
         <div className="app">
           <Header />
           <main>

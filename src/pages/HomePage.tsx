@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks.ts';
 import { fetchPopularMovies, searchMovies, clearSearchResults } from '../features/movies/moviesSlice.ts';
@@ -10,21 +10,24 @@ export const HomePage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { movies, searchResults, loading, error } = useAppSelector((state) => state.movies);
+  const [currentSearchQuery, setCurrentSearchQuery] = useState('');
 
   useEffect(() => {
     dispatch(fetchPopularMovies(1));
   }, [dispatch]);
 
   const handleSearch = (query: string) => {
+    setCurrentSearchQuery(query);
     dispatch(searchMovies({ query }));
   };
 
   const handleClearSearch = () => {
+    setCurrentSearchQuery('');
     dispatch(clearSearchResults());
   };
 
-  const displayMovies = searchResults.length > 0 ? searchResults : movies;
-  const isSearchActive = searchResults.length > 0;
+  const isSearchActive = !!currentSearchQuery;
+  const displayMovies = isSearchActive ? searchResults : movies;
 
   return (
     <div className={styles.page}>
@@ -44,8 +47,12 @@ export const HomePage = () => {
       {loading && <div className={styles.loading}>Loading...</div>}
       {error && <div className={styles.error}>{error}</div>}
       
-      {!loading && !error && displayMovies.length === 0 && (
-        <div className={styles.empty}>No movies found</div>
+      {!loading && !error && isSearchActive && searchResults.length === 0 && (
+        <div className={styles.empty}>No movies found for "{currentSearchQuery}"</div>
+      )}
+
+      {!loading && !error && !isSearchActive && movies.length === 0 && (
+        <div className={styles.empty}>No movies available</div>
       )}
 
       {!loading && displayMovies.length > 0 && (

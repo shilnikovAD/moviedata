@@ -13,7 +13,7 @@ import {
   addMessage,
   loadFromStorageAction,
 } from '../features/watchParty/watchPartySlice';
-import { watchPartyService, WatchPartyService } from '../services/watchPartyService';
+import { watchPartyService, WatchPartyService } from '../services/watchPartyServiceWebSocket';
 import { movieApi } from '../services/movieApi';
 import { VideoPlayer } from '../components/VideoPlayer';
 import styles from './WatchPartyPage.module.css';
