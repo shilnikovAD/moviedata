@@ -177,6 +177,56 @@ npm run build
 vercel deploy
 ```
 
+## Развертывание на Vercel с реальным TMDB API
+
+### Шаг 1: Настройка переменных окружения в Vercel
+
+1. Откройте ваш проект на [Vercel](https://vercel.com)
+2. Перейдите в **Settings** → **Environment Variables**
+3. Добавьте следующие переменные:
+
+```
+VITE_USE_MOCK=false
+VITE_TMDB_API_KEY=6b9590515133272d26bc843f7189fd91
+VITE_SUPABASE_URL=https://hjuxjngtnubujsxjmkmi.supabase.co
+VITE_SUPABASE_ANON_KEY=sb_publishable_ElDm_zJ-xDH9uawCFl2W0A_2bMK3MS1
+VITE_WS_URL=ws://localhost:3001
+```
+
+### Шаг 2: Передеплой проекта
+
+```bash
+# Сделайте commit изменений
+git add .
+git commit -m "Enable real TMDB API for production"
+git push origin main
+
+# Vercel автоматически передеплоит
+```
+
+### Шаг 3: Проверка
+
+После деплоя:
+1. Откройте приложение на Vercel
+2. Попробуйте поиск "Spider-Man" 
+3. Должны появиться реальные результаты из TMDB
+
+### Если всё ещё не работает:
+
+1. **Проверьте консоль браузера** (F12 → Console) на ошибки
+2. **Проверьте Network** вкладку на failed requests
+3. **Убедитесь что переменные окружения установлены** в Vercel
+
+### Альтернатива: Использование mock данных
+
+Если TMDB API не работает в продакшене, вернитесь к mock:
+
+```env
+VITE_USE_MOCK=true
+```
+
+Mock данные включают Spider-Man и другие популярные фильмы.
+
 ### Для Netlify
 
 Создан файл `public/_redirects` для правильной обработки клиентских маршрутов. Просто запустите:
